@@ -1,37 +1,43 @@
 <template>
     <div>
-        <h1>Welcome to Hands on Vue.js with ASP.NET Core!</h1>
-        <p>
-            The time is: {{ time }}
-        </p>
-        <p>
-            The current users of our system are:
-            <ul>
-                <li v-for="user in users" :key="user.userName">
-                    {{ user.fullName }} - {{ user.userName }}
-                </li>
-            </ul>
-        </p>
+        <product-list />
     </div>
 </template>
 
 <script>
+import ProductList from "./products/List.vue"
 export default {
     name: 'app',
-    data () {
-        return {
-            time: new Date().toString(),
-            users: []
-        }
-    },
-    mounted () {
-        fetch('/api/users')
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                this.users = data
-            })
+    components: {
+        ProductList
     }
 }
 </script>
+
+<style>
+    * {
+        box-sizing: border-box !important;
+    }
+    .products {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .list, .details {
+        width: 50%;
+        float: left;
+    }
+    .list .item {
+        width: 50%;
+        float: left;
+        padding: 20px 10px 20px 0;
+    }
+    .list img,
+    .list h3,
+    .list p {
+        cursor: pointer;
+    }
+    .list img {
+        width: 100px;
+    }
+</style>
