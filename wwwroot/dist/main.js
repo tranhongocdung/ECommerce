@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1155ee76d4018428dbbf"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e8d2db7e37feefbb80ad"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -2097,7 +2097,7 @@ var Component = __webpack_require__(17)(
   /* cssModules */
   null
 )
-Component.options.__file = "D:\\VueJS\\DuyThai\\ECommerce\\ClientApp\\components\\App.vue"
+Component.options.__file = "D:\\VueJS\\Project\\ECommerce\\ClientApp\\components\\App.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] App.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -2189,13 +2189,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'app',
     data () {
         return {
-            time: new Date().toString()
+            time: new Date().toString(),
+            users: []
         }
+    },
+    mounted () {
+        fetch('/api/users')
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                this.users = data
+            })
     }
 });
 
@@ -2205,7 +2223,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('h1', [_vm._v("Welcome to Hands on Vue.js with ASP.NET Core!")]), _vm._v(" "), _c('p', [_vm._v("\n        The time is: " + _vm._s(_vm.time) + "\n    ")])])
+  return _c('div', [_c('h1', [_vm._v("Welcome to Hands on Vue.js with ASP.NET Core!")]), _vm._v(" "), _c('p', [_vm._v("\n        The time is: " + _vm._s(_vm.time) + "\n    ")]), _vm._v(" "), _c('p', [_vm._v("\n        The current users of our system are:\n        "), _c('ul', _vm._l((_vm.users), function(user) {
+    return _c('li', {
+      key: user.userName
+    }, [_vm._v("\n                " + _vm._s(user.fullName) + " - " + _vm._s(user.userName) + "\n            ")])
+  }))])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {
