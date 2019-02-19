@@ -10,20 +10,12 @@
                 <hr />
             </div>
         </div>
-        <product-details class="details" v-if="selectedProduct" :product="selectedProduct" />
-
-
     </div>
 </template>
 
 <script>
-import ProductDetails from "./Details.vue"
-
 export default {
     name: "product-list",
-    components: {
-        ProductDetails
-    },
     data() {
             return {
             products: [
@@ -73,8 +65,33 @@ export default {
     },
     methods: {
         select(product) {
-            this.selectedProduct = product
+            this.$router.push(`/products/${product.slug}`);
         }
     }
 }
 </script>
+
+<style>
+    * {
+        box-sizing: border-box !important;
+    }
+    .products {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .list .item {
+        width: 25%;
+        float: left;
+        padding: 20px 10px 20px 0;
+    }
+    .list img,
+    .list h3,
+    .list p {
+        cursor: pointer;
+    }
+    .list img {
+
+    width: 100px;
+    }
+</style>
