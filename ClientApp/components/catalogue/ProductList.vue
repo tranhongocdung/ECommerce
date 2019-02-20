@@ -10,7 +10,7 @@
                         <p class="mt-4 mb-4">
                             {{ product.shortDescription }}
                         </p>
-                        <p class="mt-4 mb-4">{{ product.price }}</p>
+                        <p class="mt-4 mb-4">Prices from £{{ product.price }}</p>
                         <b-button variant="primary">Add to cart</b-button>
                     </b-media>
                 </b-col>
