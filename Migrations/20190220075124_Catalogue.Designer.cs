@@ -11,9 +11,10 @@ using System;
 namespace ECommerce.Migrations
 {
     [DbContext(typeof(EcommerceContext))]
-    partial class EcommerceContextModelSnapshot : ModelSnapshot
+    [Migration("20190220075124_Catalogue")]
+    partial class Catalogue
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
