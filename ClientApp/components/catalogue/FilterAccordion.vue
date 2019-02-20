@@ -2,7 +2,7 @@
     <b-list-group-item>
         <div :class="{ 'header': true, 'open': open }" @click="open = !open">
             <slot name="header"></slot>
-            <i class="fas fa-chevron-down float-right"></i>
+            <font-awesome-icon icon="chevron-down" class="float-right" />
         </div>
         <transition @enter="onEnter" @leave="onLeave">
         <div class="body mt-3 pt-2" v-if="open">

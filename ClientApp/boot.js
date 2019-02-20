@@ -2,12 +2,18 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import BootstrapVue from "bootstrap-vue";
 import NProgress from "nprogress";
-
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faSync, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 Vue.use(VueRouter);
 Vue.use(BootstrapVue);
 import Catalogue from "./pages/Catalogue.vue";
 import Product from "./pages/Product.vue";
+library.add(faSync,faChevronDown, faChevronUp)
 
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+Vue.config.productionTip = false
 const routes = [
     { path: "/products", component: Catalogue },
     { path: "/products/:slug", component: Product },

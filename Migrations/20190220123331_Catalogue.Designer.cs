@@ -11,7 +11,7 @@ using System;
 namespace ECommerce.Migrations
 {
     [DbContext(typeof(EcommerceContext))]
-    [Migration("20190220075124_Catalogue")]
+    [Migration("20190220123331_Catalogue")]
     partial class Catalogue
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
