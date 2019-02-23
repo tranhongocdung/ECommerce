@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "457fdabf73e0af0d77d2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "565ac2d0f2670e59b172"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -13033,6 +13033,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.filters = filters;
         }
     },
+    beforeRouteUpdate(to, from, next) {
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get("/api/products", { params: to.query }).then(response => {
+            this.products = response.data;
+            next();
+        });
+    },
     beforeRouteEnter(to, from, next) {
         __WEBPACK_IMPORTED_MODULE_0_axios___default.a
             .all([
@@ -13351,6 +13357,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -13375,6 +13438,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.$route.query.minPrice || 0,
                 this.$route.query.maxPrice || 1000
             ];
+        },
+        screenSize() {
+            return [
+                this.$route.query.minScreen || 0,
+                this.$route.query.maxScreen || 7
+            ];
+        },
+        capacity() {
+            return this.$route.query.capacity || "";
+        },
+        colours() {
+            return this.$route.query.colours || "";
+        },
+        os() {
+            return this.$route.query.os || "";
+        },
+        features() {
+            return this.$route.query.features || "";
         }
     },
     methods: {
@@ -13409,6 +13490,109 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             let query = Object.assign({}, this.$route.query);
             query.minPrice = prices[0];
             query.maxPrice = prices[1];
+            this.$router.push({ query: query });
+        },
+        filterScreenSize(sizes) {
+            let query = Object.assign({}, this.$route.query);
+            query.minScreen = sizes[0];
+            query.maxScreen = sizes[1];
+            this.$router.push({ query: query });
+        },
+        filterCapacity(capacity) {
+            let query = Object.assign({}, this.$route.query);
+            let split = query.capacity ? query.capacity.split("|") : [];
+            if (split.indexOf(capacity) > -1) {
+                let index = split.indexOf(capacity);
+            split.splice(index, 1);
+            } else {
+                split.push(capacity);
+            }
+            if (split.length) {
+                let joined = split.join("|");
+                query.capacity = joined;
+            } else {
+                delete query.capacity;
+            }
+            this.$router.push({ query: query });
+        },
+        clearCapacity() {
+            if (this.capacity.length) {
+                let query = Object.assign({}, this.$route.query);
+                delete query.capacity;
+                this.$router.push({ query: query });
+            }
+        },
+        clearColours() {
+            if (this.colours.length) {
+                let query = Object.assign({}, this.$route.query);
+                delete query.colours;
+                this.$router.push({ query: query });
+            }
+        },
+        filterColour(colour) {
+            let query = Object.assign({}, this.$route.query);
+            let split = query.colours ? query.colours.split("|") : [];
+            if (split.indexOf(colour) > -1) {
+                let index = split.indexOf(colour);
+                split.splice(index, 1);
+            } else {
+                split.push(colour);
+            }
+            if (split.length) {
+                let joined = split.join("|");
+                query.colours = joined;
+            } else {
+                delete query.colours;
+            }
+            this.$router.push({ query: query });
+        },
+        clearOS() {
+            if (this.os.length) {
+                let query = Object.assign({}, this.$route.query);
+                delete query.os;
+                this.$router.push({ query: query });
+            }
+        },
+        filterOS(os) {
+            let query = Object.assign({}, this.$route.query);
+            let split = query.os ? query.os.split("|") : [];
+
+            if (split.indexOf(os) > -1) {
+                let index = split.indexOf(os);
+                split.splice(index, 1);
+            } else {
+                split.push(os);
+            }
+            if (split.length) {
+                let joined = split.join("|");
+                query.os = joined;
+            } else {
+                delete query.os;
+            }
+            this.$router.push({ query: query });
+        },
+        clearFeatures() {
+            if (this.features.length) {
+                let query = Object.assign({}, this.$route.query);
+                delete query.features;
+                this.$router.push({ query: query });
+            }
+        },
+        filterFeature(feature) {
+            let query = Object.assign({}, this.$route.query);
+            let split = query.features ? query.features.split("|") : [];
+            if (split.indexOf(feature) > -1) {
+                let index = split.indexOf(feature);
+                split.splice(index, 1);
+            } else {
+                split.push(feature);
+            }
+            if (split.length) {
+                let joined = split.join("|");
+                query.features = joined;
+            } else {
+                delete query.features;
+            }
             this.$router.push({ query: query });
         }
     }
@@ -18440,7 +18624,147 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "callback": _vm.filterPrice
     }
-  })], 1)])], 1)], 1)
+  })], 1)]), _vm._v(" "), _c('filter-accordion', [_c('span', {
+    attrs: {
+      "slot": "header"
+    },
+    slot: "header"
+  }, [_vm._v("Screen size")]), _vm._v(" "), _c('div', {
+    staticClass: "slider",
+    attrs: {
+      "slot": "body"
+    },
+    slot: "body"
+  }, [_c('vue-slider', {
+    attrs: {
+      "value": _vm.screenSize,
+      "formatter": "{value} in",
+      "min": 0,
+      "max": 7,
+      "lazy": true,
+      "width": "90%"
+    },
+    on: {
+      "callback": _vm.filterScreenSize
+    }
+  })], 1)]), _vm._v(" "), _c('filter-accordion', [_c('span', {
+    attrs: {
+      "slot": "header"
+    },
+    slot: "header"
+  }, [_vm._v("Colour")]), _vm._v(" "), _c('b-row', {
+    attrs: {
+      "slot": "body"
+    },
+    slot: "body"
+  }, [_c('b-col', {
+    attrs: {
+      "cols": "6"
+    }
+  }, [_c('div', {
+    class: {
+      'filter-item': true,
+      'active': _vm.colours.length === 0
+    },
+    on: {
+      "click": _vm.clearColours
+    }
+  }, [_vm._v("\n                    All")])]), _vm._v(" "), _vm._l((_vm.filters.colours), function(item) {
+    return _c('b-col', {
+      key: item,
+      attrs: {
+        "cols": "6"
+      }
+    }, [_c('div', {
+      class: {
+        'filter-item': true, 'active':
+        _vm.colours.indexOf(item) > -1
+      },
+      on: {
+        "click": function($event) {
+          return _vm.filterColour(item)
+        }
+      }
+    }, [_vm._v("\n                        " + _vm._s(item) + "\n                    ")])])
+  })], 2)], 1), _vm._v(" "), _c('filter-accordion', [_c('span', {
+    attrs: {
+      "slot": "header"
+    },
+    slot: "header"
+  }, [_vm._v("Operating system")]), _vm._v(" "), _c('b-row', {
+    attrs: {
+      "slot": "body"
+    },
+    slot: "body"
+  }, [_c('b-col', {
+    attrs: {
+      "cols": "6"
+    }
+  }, [_c('div', {
+    class: {
+      'filter-item': true,
+      'active': _vm.os.length === 0
+    },
+    on: {
+      "click": _vm.clearOS
+    }
+  }, [_vm._v("All")])]), _vm._v(" "), _vm._l((_vm.filters.os), function(item) {
+    return _c('b-col', {
+      key: item,
+      attrs: {
+        "cols": "6"
+      }
+    }, [_c('div', {
+      class: {
+        'filter-item': true, 'active': _vm.os.indexOf(item) >
+          -1
+      },
+      on: {
+        "click": function($event) {
+          return _vm.filterOS(item)
+        }
+      }
+    }, [_vm._v(_vm._s(item))])])
+  })], 2)], 1), _vm._v(" "), _c('filter-accordion', [_c('span', {
+    attrs: {
+      "slot": "header"
+    },
+    slot: "header"
+  }, [_vm._v("Features")]), _vm._v(" "), _c('b-row', {
+    attrs: {
+      "slot": "body"
+    },
+    slot: "body"
+  }, [_c('b-col', {
+    attrs: {
+      "cols": "6"
+    }
+  }, [_c('div', {
+    class: {
+      'filter-item': true, 'active': _vm.features.length ===
+        0
+    },
+    on: {
+      "click": _vm.clearFeatures
+    }
+  }, [_vm._v("All")])]), _vm._v(" "), _vm._l((_vm.filters.features), function(item) {
+    return _c('b-col', {
+      key: item,
+      attrs: {
+        "cols": "6"
+      }
+    }, [_c('div', {
+      class: {
+        'filter-item': true, 'active':
+        _vm.features.indexOf(item) > -1
+      },
+      on: {
+        "click": function($event) {
+          return _vm.filterFeature(item)
+        }
+      }
+    }, [_vm._v(_vm._s(item) + "\n                ")])])
+  })], 2)], 1)], 1)], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (true) {

@@ -39,6 +39,12 @@ export default {
             this.filters = filters;
         }
     },
+    beforeRouteUpdate(to, from, next) {
+        axios.get("/api/products", { params: to.query }).then(response => {
+            this.products = response.data;
+            next();
+        });
+    },
     beforeRouteEnter(to, from, next) {
         axios
             .all([
